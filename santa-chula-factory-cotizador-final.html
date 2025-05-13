@@ -3,302 +3,281 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Santa Chula Factory - Cotizador</title>
+  <title>Cotizador - Santa Chula Factory</title>
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Montserrat&display=swap" rel="stylesheet">
   <style>
     :root {
-      --gris-oscuro: #2e2e2e;
-      --lila: #bfa2db;
-      --rosa: #f7d6e0;
+      --gris-oscuro: #2f2f2f;
       --blanco: #ffffff;
+      --lila: #b39ddb;
+      --rosa: #f8bbd0;
       --negro: #000000;
     }
 
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
-      background-color: var(--blanco);
-      color: var(--gris-oscuro);
-      line-height: 1.6;
-    }
-
-    h1, h2, h3 {
-      font-family: 'Lilita One', cursive;
-      text-transform: uppercase;
+      background-color: var(--gris-oscuro);
+      color: var(--blanco);
     }
 
     header {
+      position: relative;
       text-align: center;
-      background-color: var(--gris-oscuro);
-      color: var(--blanco);
-      padding: 2rem 1rem;
     }
 
-    header img {
-      max-width: 180px;
+    header img.portada {
+      width: 100%;
+      height: 80vh;
+      object-fit: cover;
+      filter: brightness(60%);
+    }
+
+    header img.logo {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      opacity: 0.9;
+    }
+
+    h1 {
+      font-family: 'Lilita One', cursive;
+      text-align: center;
       margin: 1rem 0;
+      font-size: 2.5rem;
     }
 
     section {
-      padding: 2rem 1rem;
       max-width: 900px;
       margin: auto;
+      padding: 2rem;
     }
 
-    .card, .form-card {
-      background-color: var(--rosa);
+    .card {
+      background-color: var(--negro);
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      padding: 2rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
       margin-bottom: 2rem;
     }
 
-    .accordion-section {
-      border-radius: 12px;
-      overflow: hidden;
+    .accordion button {
+      background-color: var(--lila);
+      color: var(--negro);
+      width: 100%;
+      padding: 1rem;
+      text-align: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .accordion .panel {
+      display: none;
+      background-color: var(--blanco);
+      color: var(--negro);
+      padding: 1rem;
+      border-radius: 0 0 12px 12px;
       margin-bottom: 1rem;
     }
 
-    .accordion-header {
-      padding: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      background-color: var(--lila);
-    }
-
-    .accordion-content {
-      padding: 1rem;
-      background-color: var(--blanco);
-      display: none;
-      border-top: 1px solid #ccc;
-    }
-
-    .form-card label {
+    form label {
       display: block;
       margin-top: 1rem;
       font-weight: bold;
     }
 
-    .form-card input,
-    .form-card select,
-    .form-card textarea {
+    form input, form select, form textarea {
       width: 100%;
-      padding: 0.75rem;
-      margin-top: 0.25rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1rem;
-      box-sizing: border-box;
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: none;
+      margin-top: 0.3rem;
     }
 
-    .btn-enviar {
-      margin-top: 1.5rem;
-      background-color: var(--gris-oscuro);
-      color: var(--blanco);
-      border: none;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      font-family: 'Lilita One', cursive;
+    .options-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .option-card {
+      background-color: var(--rosa);
+      color: var(--negro);
+      padding: 1rem;
       border-radius: 10px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      flex: 1 1 150px;
+      text-align: center;
     }
 
-    .btn-enviar:hover {
-      background-color: var(--negro);
+    .option-card.active {
+      background-color: var(--lila);
     }
 
-    .hidden { display: none; }
+    #message {
+      background-color: var(--lila);
+      color: var(--negro);
+      text-align: center;
+      padding: 1rem;
+      border-radius: 10px;
+      display: none;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Santa Chula Factory - Cotizador</h1>
-    <img src="https://via.placeholder.com/800x300?text=Imagen+de+Portada" alt="Imagen de portada" />
-    <img src="https://via.placeholder.com/150x150?text=Logo" alt="Logo Santa Chula Factory" />
+    <img src="https://raw.githubusercontent.com/mishafromhell/Cotizador-santa-chula/main/SCFAC-10.jpg" alt="Portada" class="portada">
+    <img src="https://raw.githubusercontent.com/mishafromhell/Cotizador-santa-chula/main/sc%20logo%20factory.png" alt="Logo" class="logo">
   </header>
 
-  <section>
-    <div class="card">
-      <h2>¿Quiénes somos?</h2>
-      <p>Somos un taller de serigrafía y estampados liderado por mujeres emprendedoras con más de 10 años de experiencia...</p>
-      <h3>Misión</h3>
-      <p>Impulsamos la creatividad y la expresión artística a través de la serigrafía...</p>
-      <h3>Visión</h3>
-      <p>Ser un referente en serigrafía y estampado, consolidándonos como un taller que también inspira...</p>
-    </div>
+  <h1>Santa Chula Factory</h1>
 
-    <div class="card">
-      <h2>Servicios que ofrecemos</h2>
-      <div class="accordion-section">
-        <div class="accordion-header" style="background-color: #bfa2db;">Serigrafía</div>
-        <div class="accordion-content">Ideal para producciones en volumen, colores vibrantes y alta durabilidad.</div>
-      </div>
-      <div class="accordion-section">
-        <div class="accordion-header" style="background-color: #f7d6e0;">Vinil textil</div>
-        <div class="accordion-content">Perfecto para nombres, números y gráficos simples. Diseños sólidos y personalizados.</div>
-      </div>
-      <div class="accordion-section">
-        <div class="accordion-header" style="background-color: #d6f7f0;">Sublimación</div>
-        <div class="accordion-content">Para textiles claros con poliéster. Ideal para degradados y fotos.</div>
-      </div>
-      <div class="accordion-section">
-        <div class="accordion-header" style="background-color: #e0d6f7;">DTF</div>
-        <div class="accordion-content">Impresión a todo color en cualquier tela. Resistente y flexible.</div>
-      </div>
-    </div>
+  <section class="card">
+    <h2>¿Quiénes somos? 💡</h2>
+    <p>Somos un taller de serigrafía y estampados liderado por mujeres emprendedoras con más de 10 años de experiencia. Desde 2017, convertimos nuestra pasión en proyectos únicos, colaborando con marcas independientes y negocios locales para crear piezas auténticas con identidad y estilo.</p>
+    <h3>Misión 🎯</h3>
+    <p>Impulsamos la creatividad y la expresión artística a través de la serigrafía y el estampado, transformando ideas en diseños únicos con calidad y dedicación.</p>
+    <h3>Visión 🌟</h3>
+    <p>Ser un referente en serigrafía y estampado, consolidándonos como un taller que no solo imprime diseños, sino que también inspira, acompaña y potencia el arte de cada cliente.</p>
+  </section>
 
-    <div class="form-card">
-      <h2>Requerimientos para cotización de proyectos</h2>
-      <!-- Aquí irá el formulario completo (puede añadirse después) -->
-      
-<form id="cotizador-form">
-  <label for="rango-piezas">Cantidad de piezas</label>
-  <select id="rango-piezas" name="rango-piezas">
-    <option value="">Selecciona un rango</option>
-    <option value="menudeo">1 a 17 (Menudeo)</option>
-    <option value="medio">18 a 36 (Medio mayoreo)</option>
-    <option value="mayoreo">37 o más (Mayoreo)</option>
-  </select>
-
-  <div id="tecnicas-section" class="hidden">
-    <label>Técnica de impresión</label>
-    <div class="tech-options" id="tech-options"></div>
-  </div>
-
-  <label for="cantidad-impresiones">¿Cuántas impresiones gráficas distintas? (máximo 6)</label>
-  <select id="cantidad-impresiones" name="cantidad-impresiones">
-    <option value="">Selecciona una opción</option>
-    <option value="1">1 impresión</option>
-    <option value="2">2 impresiones</option>
-    <option value="3">3 impresiones</option>
-    <option value="4">4 impresiones</option>
-    <option value="5">5 impresiones</option>
-    <option value="6">6 impresiones</option>
-  </select>
-
-  <div id="posiciones-section" class="hidden"></div>
-
-  <div id="colores-section" class="hidden">
-    <label for="colores-grafico">Cantidad de colores por gráfico</label>
-    <select id="colores-grafico" name="colores-grafico"></select>
-  </div>
-
-  <div id="diseno-section" class="hidden">
-    <label for="tipo-diseno">Tipo de diseño</label>
-    <select id="tipo-diseno" name="tipo-diseno">
-      <option value="">Selecciona una opción</option>
-      <option value="vectorial">Vectorial</option>
-      <option value="imagen">Imagen</option>
-      <option value="degradado">Degradado</option>
-    </select>
-  </div>
-
-  <label for="comentarios">📝 Comentarios adicionales</label>
-    <textarea id="comentarios" name="comentarios" rows="4" placeholder="¿Algo más que debamos saber?"></textarea>
-
-    <button type="submit" class="btn-enviar">Enviar</button>
-</form>
-
-<script>
-  const piezasSelect = document.getElementById('rango-piezas');
-  const techSection = document.getElementById('tecnicas-section');
-  const techOptions = document.getElementById('tech-options');
-  const coloresSection = document.getElementById('colores-section');
-  const disenoSection = document.getElementById('diseno-section');
-  const coloresSelect = document.getElementById('colores-grafico');
-  const impresionSelect = document.getElementById('cantidad-impresiones');
-  const posicionDiv = document.getElementById('posiciones-section');
-
-  const tecnicas = {
-    serigrafia: 'Serigrafía',
-    vinil: 'Vinil textil',
-    sublimacion: 'Sublimación',
-    dtf: 'DTF'
-  };
-
-  let selectedTech = null;
-
-  piezasSelect.addEventListener('change', () => {
-    const value = piezasSelect.value;
-    techOptions.innerHTML = '';
-    techSection.classList.toggle('hidden', !value);
-    const disponibles = value === 'menudeo' ? ['vinil', 'sublimacion', 'dtf'] : Object.keys(tecnicas);
-    disponibles.forEach(key => {
-      const card = document.createElement('div');
-      card.className = 'tech-card';
-      card.textContent = tecnicas[key];
-      card.dataset.tech = key;
-      card.addEventListener('click', () => {
-        document.querySelectorAll('.tech-card').forEach(c => c.classList.remove('active'));
-        card.classList.add('active');
-        selectedTech = key;
-        coloresSection.classList.toggle('hidden', !(key === 'serigrafia' || key === 'vinil'));
-        disenoSection.classList.toggle('hidden', !(key === 'serigrafia' || key === 'vinil'));
-        coloresSelect.innerHTML = '<option value="">Selecciona una opción</option>';
-        if (key === 'serigrafia') {
-          coloresSelect.innerHTML += '<option value="fotografia">Fotografía a color</option>';
-          for (let i = 1; i <= 6; i++) {
-            coloresSelect.innerHTML += `<option value="${i}">${i} color(es)</option>`;
-          }
-        } else if (key === 'vinil') {
-          for (let i = 1; i <= 3; i++) {
-            coloresSelect.innerHTML += `<option value="${i}">${i} color(es)</option>`;
-          }
-        }
-        const disenoSelect = document.getElementById('tipo-diseno');
-        [...disenoSelect.options].forEach(opt => {
-          opt.disabled = false;
-          if (key === 'vinil' && opt.value !== '' && opt.value !== 'vectorial') {
-            opt.disabled = true;
-          }
-        });
-      });
-      techOptions.appendChild(card);
-    });
-  });
-
-  impresionSelect.addEventListener('change', () => {
-    const cantidad = parseInt(impresionSelect.value);
-    posicionDiv.innerHTML = '';
-    posicionDiv.classList.remove('hidden');
-    for (let i = 1; i <= cantidad; i++) {
-      const bloque = document.createElement('div');
-      bloque.innerHTML = `
-        <label for="posicion-${i}">Ubicación del gráfico ${i}</label>
-        <select id="posicion-${i}" name="posicion-${i}">
-          <option value="">Selecciona una opción</option>
-          <option value="frente">Frente</option>
-          <option value="espalda">Espalda</option>
-          <option value="manga">Manga</option>
-          <option value="otro">Otro</option>
-        </select>
-        <label for="tamano-${i}">Tamaño del gráfico ${i}</label>
-        <select id="tamano-${i}" name="tamano-${i}">
-          <option value="">Selecciona un tamaño</option>
-          <option value="cuarto">1/4 Carta</option>
-          <option value="media">Media Carta</option>
-          <option value="carta">Carta</option>
-          <option value="doble">Doble Carta</option>
-        </select>
-      `;
-      posicionDiv.appendChild(bloque);
-    }
-  });
-</script>
-
+  <section class="card">
+    <h2>Servicios que ofrecemos 🛠️</h2>
+    <div class="accordion">
+      <button class="accordion-btn">Serigrafía (mínimo de 18 piezas)</button>
+      <div class="panel">La serigrafía es perfecta para producciones en volumen, garantizando colores vibrantes y gran durabilidad en textiles. Se recomienda para diseños con pocos colores sólidos y sin degradados, ya que cada color requiere un proceso especial. Ideal para merchandising, uniformes o colecciones de ropa con una estética definida.</div>
+      <button class="accordion-btn">Vinil textil</button>
+      <div class="panel">Esta técnica es excelente para diseños con colores sólidos y detalles precisos, sin necesidad de grandes producciones. Perfecta para nombres, números y gráficos simples sobre cualquier prenda. Es una opción práctica y accesible para pedidos únicos o personalizados, ofreciendo un acabado resistente y profesional.</div>
+      <button class="accordion-btn">Sublimación</button>
+      <div class="panel">La mejor alternativa para diseños con múltiples colores y degradados, ya que se fusiona con la tela sin afectar la textura. Funciona únicamente en textiles claros con alto porcentaje de poliéster. Ideal para estampados fotográficos, camisetas deportivas y productos personalizados sin límites de color.</div>
+      <button class="accordion-btn">DTF</button>
+      <div class="panel">La impresión DTF es increíblemente versátil, permitiendo estampados a todo color sobre cualquier tipo de tela sin restricciones. Es perfecta para pedidos pequeños, diseños con muchos detalles y colores, logrando un acabado flexible, resistente y duradero. Ideal para piezas únicas, moda personalizada o proyectos creativos sin complicaciones.</div>
     </div>
   </section>
 
+  <section class="card">
+    <h2>Requerimientos para cotización de proyectos 📋</h2>
+    <form id="quoteForm">
+      <label for="numPrints">📌 Cantidad de impresiones gráficas</label>
+      <select id="numPrints" name="numPrints">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+
+      <label for="projectName">📌 Nombre del proyecto</label>
+      <input type="text" id="projectName" name="projectName" required>
+
+      <label for="quantity">📌 Cantidad de piezas</label>
+      <select id="quantity" name="quantity">
+        <option value="menudeo">1–17</option>
+        <option value="medio">18–36</option>
+        <option value="mayoreo">37+</option>
+      </select>
+
+      <label>📌 Técnica de impresión</label>
+      <div class="options-row" id="techniqueOptions">
+        <div class="option-card" data-value="serigrafia">Serigrafía</div>
+        <div class="option-card" data-value="vinil">Vinil</div>
+        <div class="option-card" data-value="sublimacion">Sublimación</div>
+        <div class="option-card" data-value="dtf">DTF</div>
+      </div>
+
+      <div id="dynamicFields"></div>
+
+      <label for="comments">Comentarios adicionales</label>
+      <textarea id="comments" name="comments"></textarea>
+
+      <button type="submit">Enviar cotización</button>
+    </form>
+    <div id="message"></div>
+  </section>
+
   <script>
-    document.querySelectorAll('.accordion-header').forEach(header => {
-      header.addEventListener('click', () => {
-        const content = header.nextElementSibling;
-        const isVisible = content.style.display === 'block';
-        document.querySelectorAll('.accordion-content').forEach(c => c.style.display = 'none');
-        content.style.display = isVisible ? 'none' : 'block';
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.accordion-btn').forEach(button => {
+        button.addEventListener('click', () => {
+          const panel = button.nextElementSibling;
+          panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+        });
       });
+
+      const quantitySelect = document.getElementById('quantity');
+      const techniqueCards = document.querySelectorAll('.option-card');
+      const dynamicFields = document.getElementById('dynamicFields');
+      const numPrintsSelect = document.getElementById('numPrints');
+      let selectedTechnique = '';
+
+      quantitySelect.addEventListener('change', filterTechniques);
+      numPrintsSelect.addEventListener('change', generateDynamicFields);
+
+      techniqueCards.forEach(card => {
+        card.addEventListener('click', () => {
+          techniqueCards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          selectedTechnique = card.dataset.value;
+          generateDynamicFields();
+        });
+      });
+
+      function filterTechniques() {
+        const value = quantitySelect.value;
+        techniqueCards.forEach(card => {
+          const tech = card.dataset.value;
+          const show = value === 'menudeo' ? (tech !== 'serigrafia') : true;
+          card.style.display = show ? 'block' : 'none';
+        });
+      }
+
+      function generateDynamicFields() {
+        dynamicFields.innerHTML = '';
+        const numImpresiones = parseInt(numPrintsSelect?.value || 1);
+        for (let i = 1; i <= numImpresiones; i++) {
+          const div = document.createElement('div');
+          div.innerHTML = `
+            <h4>Impresión ${i}</h4>
+            <label>Tamaño</label>
+            <select name="tamaño_${i}">
+              <option>1/4 Carta</option>
+              <option>Media Carta</option>
+              <option>Carta</option>
+              <option>Doble Carta</option>
+            </select>
+          `;
+          if (selectedTechnique === 'serigrafia' || selectedTechnique === 'vinil') {
+            const maxColors = selectedTechnique === 'serigrafia' ? 6 : 3;
+            const colorOptions = Array.from({ length: maxColors }, (_, j) => `<option>${j + 1}</option>`).join('');
+            div.innerHTML += `
+              <label>Cantidad de colores</label>
+              <select name="colores_${i}">${colorOptions}</select>
+            `;
+          }
+          dynamicFields.appendChild(div);
+        }
+      }
+
+      document.getElementById('quoteForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const message = document.getElementById('message');
+        message.textContent = '👍 Gracias, tu información ha sido enviada. ⏳ Redirigiendo al inicio... 🎉 Te contactaremos pronto.';
+        message.style.display = 'block';
+        setTimeout(() => {
+          message.style.display = 'none';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          this.reset();
+          dynamicFields.innerHTML = '';
+          techniqueCards.forEach(c => c.classList.remove('active'));
+        }, 5000);
+      });
+
+      filterTechniques();
+      generateDynamicFields();
     });
   </script>
 </body>
