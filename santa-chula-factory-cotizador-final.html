@@ -125,11 +125,11 @@
 
   <section class="card">
     <h2>¿Quiénes somos? 💡</h2>
-    <p>Somos un taller de serigrafía y estampados liderado por mujeres emprendedoras...</p>
+    <p>Somos un taller de serigrafía y estampados liderado por mujeres emprendedoras con más de 10 años de experiencia. Desde 2017, convertimos nuestra pasión en proyectos únicos, colaborando con marcas independientes y negocios locales para crear piezas auténticas con identidad y estilo.</p>
     <h3>Misión 🎯</h3>
-    <p>Impulsamos la creatividad y la expresión artística a través de la serigrafía...</p>
+    <p>Impulsamos la creatividad y la expresión artística a través de la serigrafía y el estampado, transformando ideas en diseños únicos con calidad y dedicación.</p>
     <h3>Visión 🌟</h3>
-    <p>Ser un referente en serigrafía y estampado...</p>
+    <p>Ser un referente en serigrafía y estampado, consolidándonos como un taller que no solo imprime diseños, sino que también inspira, acompaña y potencia el arte de cada cliente.</p>
   </section>
 
   <section class="card">
@@ -149,13 +149,14 @@
   <section class="card">
     <h2>Requerimientos para cotización de proyectos 📋</h2>
     <form id="quoteForm">
-      <label for="numPrints">📌 Cantidad de impresiones gráficas</label>
-      <select id="numPrints" name="numPrints">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
+      <label for="clientName">👤 Nombre del cliente</label>
+      <input type="text" id="clientName" name="clientName" required>
+
+      <label for="email">📧 Correo electrónico</label>
+      <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+
+      <label for="phone">📞 Teléfono</label>
+      <input type="tel" id="phone" name="phone" required pattern="\d{10}" maxlength="10" placeholder="10 dígitos">
 
       <label for="projectName">📌 Nombre del proyecto</label>
       <input type="text" id="projectName" name="projectName" required>
@@ -174,6 +175,14 @@
         <div class="option-card" data-value="sublimacion">Sublimación</div>
         <div class="option-card" data-value="dtf">DTF</div>
       </div>
+
+      <label for="numPrints">📌 Cantidad de impresiones gráficas</label>
+      <select id="numPrints" name="numPrints">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
 
       <div id="dynamicFields"></div>
 
@@ -249,6 +258,9 @@
       document.getElementById('quoteForm').addEventListener('submit', function (e) {
         e.preventDefault();
         const formData = {
+          clientName: document.getElementById('clientName').value,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value,
           projectName: document.getElementById('projectName').value,
           quantity: document.getElementById('quantity').value,
           technique: selectedTechnique,
@@ -263,7 +275,7 @@
           formData[`colores_${i}`] = colorField ? colorField.value : '';
         }
 
-        fetch('https://script.google.com/macros/s/AKfycbzNiGFvYu0tNAPJV72bPrwX7f_9ZjuYaH4uF_urxz4Mn5ABc40kIVATRS4DfB1lgO9i-Q/exec', {
+        fetch('https://script.google.com/macros/s/AKfycbzCdTNwoqUhotPTK8uHSX5L4XkRikwJwzbcFichbE4w1ukbhh6fPHliwFdU6Jpk2dp_qw/exec', {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
